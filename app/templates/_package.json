@@ -1,0 +1,48 @@
+{
+  "name": "<%= scriptAppName %>",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "require-dir": "*",
+    "run-sequence": "*",
+    "gulp": "^3.8.9",
+    "gulp-watch": "*",
+    "gulp-concat": "*",
+    "gulp-uglify": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-nodemon":"*",
+    "gulp-inject": "*",
+    "gulp-coffee": "*",
+    "gulp-minify-css": "*",
+    "gulp-filter": "*",
+    "gulp-html-replace": "*",
+    "gulp-ng-annotate": "*",
+    "gulp-jshint":"*",
+    "gulp-sass": "*",
+    "gulp-ng-html2js": "*",
+    "gulp-inject-string": "*",
+    "gulp-htmlmin": "*",
+    "gulp-git": "*",
+    "gulp-ssh":"*",
+    "gulp-uncss":"*",
+    "del": "*",
+    "main-bower-files": "*",
+    "q":"*",
+    "jshint-stylish":"*",
+    "merge-stream": "*",
+    "glob":"*",
+    "browser-sync":"*",
+    "app-root-path":"*",
+    "bower":"*"
+  },
+  "dependencies": {
+    "scp2": "*",
+    "express": "~4.9.0",
+    "debug": "~2.0.0",
+    "restler":"*",
+    "ejs":"*"
+  },
+  "scripts": {
+    "install":"bower install"
+  }
+}

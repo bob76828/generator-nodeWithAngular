@@ -1,0 +1,34 @@
+{
+  "name": "generator-nodeWithAngular",
+  "version": "1.1.0",
+  "description": "Yeoman generator for NodeJS With AngularJS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bob76828/yo-nodeWithAngular"
+  },
+  "main": "app/index.js",
+  "contributors": [
+    "Bob Lin <bob76828@gmail.com> (https://github.com/bob76828/)"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "gulp",
+    "angular",
+    "node"
+  ],
+  "peerDependencies": {
+    "yeoman-generator": "~0.17",
+    "chalk": "~0.5",
+    "bower":"*",
+    "gulp": "^3.8.9",
+    "scp2": "*",
+    "yo": ">=1.0.0"
+  }
+}
