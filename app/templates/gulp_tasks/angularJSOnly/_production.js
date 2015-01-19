@@ -20,33 +20,34 @@ var version,
   injectString = require('gulp-inject-string'),
   merge = require('merge-stream'),
   git = require('gulp-git');
-  //uncss = require('gulp-uncss'),
-  //glob = require('glob');
+//uncss = require('gulp-uncss'),
+//glob = require('glob');
 
 var paths = {
   scripts: [
-    'assets/client/app/initializer.js',
+    'assets/app/initializer.js',
     'release/public/tmp/app.js',
-    'assets/client/app/route.js',
-    'assets/client/app/*/**/*.js',
-    'assets/client/common/**/*.js'
+    'assets/app/route.js',
+    'assets/app/*/**/*.js',
+    'assets/common/**/*.js'
   ],
   styles: [
-    'assets/client/vendor/css/**/*.css',
-    'assets/client/css/*.scss'
+    'assets/vendor/css/**/*.css',
+    'assets/css/*.scss'
   ],
-  images: 'assets/client/images/**/*',
+  images: 'assets/images/**/*',
   fonts: [
     'bower_components/bootstrap/dist/fonts/*',
     'bower_components/font-awesome/fonts/*'
   ],
-  root: [
-    'assets/client/crossdomain.xml',
-    'assets/client/humans.txt',
-    'assets/client/robots.txt',
-    './assets/client/404.ejs'
-  ],
-  server: 'assets/server/**/*'
+  others: [
+    'assets/404.html',
+    'assets/apple-touch-icon-precomposed.png',
+    'assets/crossdomain.xml',
+    'assets/favicon.ico',
+    'assets/humans.txt',
+    'assets/robots.txt'
+  ]
 };
 
 git.revParse({args: '--short HEAD'}, function (err, hash) {
@@ -69,7 +70,7 @@ gulp.task('clean', function (cb) {
 
 gulp.task('replace', function () {
   // It's not necessary to read the files (will speed up things), we're only after their paths:
-  return gulp.src('./assets/client/index.ejs')
+  return gulp.src('./assets/index.html')
     .pipe(htmlreplace({
       'css': 'public/css/app.min.css?v=' + version,
       'js': 'public/js/app.min.js?v=' + version,
@@ -113,11 +114,11 @@ gulp.task('modernizr', ['clean'], function () {
 });
 
 gulp.task('vendor', ['clean'], function () {
-  var js = gulp.src('assets/client/vendor/js/**/*.js')
+  var js = gulp.src('assets/vendor/js/**/*.js')
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('release/public/tmp'));
 
-  var css = gulp.src('assets/client/vendor/css/**/*.css')
+  var css = gulp.src('assets/vendor/css/**/*.css')
     .pipe(concat('vendor.css'))
     .pipe(gulp.dest('release/public/tmp'));
 
@@ -135,17 +136,15 @@ gulp.task('scripts', ['clean'], function () {
 });
 
 gulp.task('combine', ['clean'], function () {
-  var js = gulp.src(
-    ['release/public/tmp/bower.js', 'release/public/tmp/vendor.js',
-      'release/public/tmp/layout.js', 'release/public/tmp/view.js',
-      'release/public/tmp/partials.js', 'release/public/tmp/scripts.js'])
+  var js = gulp.src(['release/public/tmp/bower.js', 'release/public/tmp/vendor.js', 'release/public/tmp/layout.js',
+    'release/public/tmp/view.js', 'release/public/tmp/partials.js', 'release/public/tmp/scripts.js'])
     .pipe(concat('app.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('release/public/js'));
 
   var css = gulp.src(['release/public/tmp/bower.css', 'release/public/tmp/vendor.css', 'release/public/tmp/app.css'])
     //.pipe(uncss({
-    //  html: glob.sync('assets/client/**/*.html')
+    //  html: glob.sync('assets/**/*.html')
     //}))
     .pipe(concat('app.min.css'))
     .pipe(minifyCSS({keepBreaks: true}))
@@ -161,31 +160,31 @@ gulp.task('images', function () {
 });
 
 gulp.task('views', function () {
-  return gulp.src('assets/client/app/**/*.html')
+  return gulp.src('assets/app/**/*.html')
     .pipe(htmlmin())
     .pipe(ngHtml2Js({
       moduleName: 'ui.partials',
-      prefix: '../assets/client/app/'
+      prefix: '../assets/app/'
     }))
     .pipe(concat('view.js'))
     .pipe(gulp.dest('release/public/tmp'));
 });
 
 gulp.task('layout', function () {
-  var layout = gulp.src('assets/client/common/layout/**/*.html')
+  var layout = gulp.src('assets/common/layout/**/*.html')
     .pipe(htmlmin())
     .pipe(ngHtml2Js({
       moduleName: 'ui.partials',
-      prefix: '../assets/client/common/layout/'
+      prefix: '../assets/common/layout/'
     }))
     .pipe(concat('layout.js'))
     .pipe(gulp.dest('release/public/tmp'));
 
-  var partials = gulp.src('assets/client/common/partials/**/*.html')
+  var partials = gulp.src('assets/common/partials/**/*.html')
     .pipe(htmlmin())
     .pipe(ngHtml2Js({
       moduleName: 'ui.partials',
-      prefix: '../assets/client/common/partials/'
+      prefix: '../assets/common/partials/'
     }))
     .pipe(concat('partials.js'))
     .pipe(gulp.dest('release/public/tmp'));
@@ -205,18 +204,13 @@ gulp.task('clean_tmp', function (cb) {
 
 gulp.task('inject_partials', function () {
   // It's not necessary to read the files (will speed up things), we're only after their paths:
-  return gulp.src('assets/client/app/app.js')
+  return gulp.src('assets/app/app.js')
     .pipe(injectString.after('angular.module(\'<%= scriptAppName %>\', [', '\'ui.partials\','))
     .pipe(gulp.dest('release/public/tmp'));
 });
 
-gulp.task('copy_files', function () {
-  return gulp.src(paths.root)
-    .pipe(gulp.dest('release'));
-});
-
-gulp.task('copy_server', function () {
-  return gulp.src(paths.server)
+gulp.task('copy_others', function () {
+  return gulp.src(paths.others)
     .pipe(gulp.dest('release'));
 });
 
@@ -227,7 +221,7 @@ gulp.task('production', function (callback) {
     ['modernizr', 'bower', 'vendor'],
     ['styles', 'scripts', 'images', 'views', 'layout'],
     'combine',
-    ['replace', 'copy_files','copy_server'],
+    ['replace', 'copy_others'],
     'clean_tmp',
     callback);
 });

@@ -21,19 +21,36 @@ var YoAngularGenerator = yeoman.generators.Base.extend({
     this.log(this.yeoman);
     // replace it with a short and sweet description of your generator
     this.log(chalk.magenta('This generator will generate a web app project using NodeJS and angularJS.'));
-    this.prompt({
-      type: 'input',
-      name: 'name',
-      message: 'Your module name',
-      default: this.appname // Default to current folder name
-    }, function (answers) {
+
+    var prompts = [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Your module name',
+        default: this.appname // Default to current folder name
+      },
+      {
+        type: 'confirm',
+        name: 'node',
+        message: 'Do you want using NodeJS ?',
+        default:true
+      }];
+
+    this.prompt(prompts, function (answers) {
       this.scriptAppName = answers.name;
+      this.node = answers.node;
       done();
     }.bind(this));
   },
   app: function(){
-    utils.copyClient(this);
-    utils.copyServer(this);
+    if(this.node) {
+      utils.copyClient(this);
+      utils.copyServer(this);
+    }
+    else
+    {
+      utils.copyAngular(this);
+    }
   },
   projectfiles: function () {
     this.copy('_.gitignore', '.gitignore');
