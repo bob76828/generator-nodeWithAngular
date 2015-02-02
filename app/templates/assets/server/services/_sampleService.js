@@ -3,11 +3,11 @@
 var express = require('express'),
   router = express.Router(),
   Q = require('q'),
-  rest = require('../models/sample');
+  sample = require('../models/sample');
 
 router.route('/').get(function (req, res) {
   var promises = [];
-  promises.push(rest.get(null,
+  promises.push(sample.test(null,
     function (response) {
       console.log('promises');
       console.log(response);

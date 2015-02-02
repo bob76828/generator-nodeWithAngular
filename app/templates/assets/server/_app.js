@@ -8,7 +8,7 @@ var express = require('express'),
   env = process.env.NODE_ENV || 'development',
   app = express();
 
-services(app);
+app.use('/api', services);
 
 // development only
 if (env === 'development') {
