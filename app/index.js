@@ -2,7 +2,7 @@
 //var util = require('util');
 //var path = require('path');
 var yeoman = require('yeoman-generator');
-var utils = require('../util.js');
+var utils = require('../app/util.js');
 var chalk = require('chalk');
 
 
