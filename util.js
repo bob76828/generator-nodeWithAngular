@@ -65,6 +65,16 @@ var copyClient = function (yeoman) {
   yeoman.copy('gulp_tasks/_development.js', 'gulp_tasks/development.js');
   yeoman.copy('gulp_tasks/_jshint.js', 'gulp_tasks/jshint.js');
   yeoman.copy('gulp_tasks/_production.js', 'gulp_tasks/production.js');
+
+  yeoman.mkdir('test');
+  yeoman.mkdir('test/e2e');
+  yeoman.mkdir('test/unit');
+  yeoman.mkdir('test/unit/common');
+  yeoman.mkdir('test/unit/common/controllers');
+  yeoman.mkdir('test/unit/main');
+  yeoman.copy('test/e2e/_demo_spec.js', 'test/e2e/demo_spec.js');
+  yeoman.copy('test/unit/common/controllers/_headerCtrl_test.js', 'test/unit/common/controllers/headerCtrl_test.js');
+  yeoman.copy('test/unit/main/_mainCtrl_test.js', 'test/unit/main/mainCtrl_test.js');
 };
 
 var copyServer = function (yeoman) {
@@ -144,6 +154,16 @@ var copyAngular = function(yeoman){
   yeoman.copy('gulp_tasks/angularJSOnly/_development.js', 'gulp_tasks/development.js');
   yeoman.copy('gulp_tasks/angularJSOnly/_jshint.js', 'gulp_tasks/jshint.js');
   yeoman.copy('gulp_tasks/angularJSOnly/_production.js', 'gulp_tasks/production.js');
+
+  yeoman.mkdir('test');
+  yeoman.mkdir('test/e2e');
+  yeoman.mkdir('test/unit');
+  yeoman.mkdir('test/unit/common');
+  yeoman.mkdir('test/unit/common/controllers');
+  yeoman.mkdir('test/unit/main');
+  yeoman.copy('test/e2e/_demo_spec.js', 'test/e2e/demo_spec.js');
+  yeoman.copy('test/unit/common/controllers/_headerCtrl_test.js', 'test/unit/common/controllers/headerCtrl_test.js');
+  yeoman.copy('test/unit/main/_mainCtrl_test.js', 'test/unit/main/mainCtrl_test.js');
 };
 
 module.exports = {

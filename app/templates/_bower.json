@@ -1,7 +1,7 @@
 {
   "name": "<%= scriptAppName %>",
   "main": "app.js",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "authors": [
     "Bob Lin <bob76828@gmail.com>"
   ],
@@ -37,12 +37,13 @@
     }
   },
   "dependencies": {
-    "jquery": "~2.1.1",
-    "bootstrap": "~3.2.0",
-    "angular": "~1.2.22",
-    "angular-resource": "~1.2.22",
-    "angular-ui-router": "~0.2.10",
-    "modernizr": "~2.8.3"
+    "jquery": "*",
+    "bootstrap": "*",
+    "angular": "*",
+    "angular-mocks": "*",
+    "angular-resource": "*",
+    "angular-ui-router": "*",
+    "modernizr": "*"
   }
 }
 

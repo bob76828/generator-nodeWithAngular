@@ -60,6 +60,8 @@ var YoAngularGenerator = yeoman.generators.Base.extend({
     this.copy('_.editorconfig', '.editorconfig');
     this.copy('_gulpfile.js', 'gulpfile.js');
     this.copy('_package.json', 'package.json');
+    this.copy('_karma.conf.js', 'karma.conf.js');
+    this.copy('_protractor.conf.js', 'protractor.conf.js');
   }
 });
 
