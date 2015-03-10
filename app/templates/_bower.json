@@ -33,7 +33,10 @@
     },
     "modernizr": {
       "main": "modernizr.js",
-      "ignore": "true"
+      "ignore": true
+    },
+    "angular-mocks": {
+      "ignore":true
     }
   },
   "dependencies": {

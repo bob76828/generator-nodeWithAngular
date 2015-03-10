@@ -8,12 +8,12 @@ module.exports = function (config) {
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'assets/vendor/js/**/*.js',
-      'assets/app/initializer.js',
-      'assets/app/app.js',
-      'assets/app/route.js',
-      'assets/app/*/**/*.js',
-      'assets/common/**/*.js',
+      'assets<%= clientPath %>vendor/js/**/*.js',
+      'assets<%= clientPath %>app/initializer.js',
+      'assets<%= clientPath %>app/app.js',
+      'assets<%= clientPath %>app/route.js',
+      'assets<%= clientPath %>app/*/**/*.js',
+      'assets<%= clientPath %>common/**/*.js',
       'test/unit/**/*_test.js'
     ],
     preprocessors: {

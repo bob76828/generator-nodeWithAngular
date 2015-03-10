@@ -33,7 +33,7 @@ var YoAngularGenerator = yeoman.generators.Base.extend({
         type: 'confirm',
         name: 'node',
         message: 'Do you want using NodeJS ?',
-        default:true
+        default:false
       }];
 
     this.prompt(prompts, function (answers) {
@@ -44,11 +44,13 @@ var YoAngularGenerator = yeoman.generators.Base.extend({
   },
   app: function(){
     if(this.node) {
+      this.clientPath = '/client/';
       utils.copyClient(this);
       utils.copyServer(this);
     }
     else
     {
+      this.clientPath = '/';
       utils.copyAngular(this);
     }
   },

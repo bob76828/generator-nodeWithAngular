@@ -1,26 +1,19 @@
 'use strict';
 
 var express = require('express'),
+  rest = require('restler'),
   router = express.Router(),
   Q = require('q'),
-  sample = require('../models/sample');
+  apiPath = 'http://beta.json-generator.com/api/json/get/M4Ze1sg';
 
 router.route('/').get(function (req, res) {
-  var promises = [];
-  promises.push(sample.test(null,
-    function (response) {
-      console.log('promises');
-      console.log(response);
-    }).promise);
-
-  Q.all(promises).then(
-    function (response) {
-      console.log('all');
-      console.log(response);
-      res.json(response);
-    }, function (response) {
-      console.log('error');
-      res.status(400).json(response);
+  rest.get(apiPath)
+    .on('2XX', function (data) {
+      res.json(data);
+    }).on('4XX', function (data) {
+      res.json(data);
+    }).on('5XX', function (data) {
+      res.json(data);
     });
 });
 

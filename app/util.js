@@ -82,9 +82,6 @@ var copyServer = function (yeoman) {
   yeoman.mkdir('assets/server');
   yeoman.copy('assets/server/_app.js', 'assets/server/app.js');
 
-  yeoman.mkdir('assets/server/models');
-  yeoman.copy('assets/server/models/_sample.js', 'assets/server/models/sample.js');
-
   yeoman.mkdir('assets/server/services');
   yeoman.copy('assets/server/services/_index.js', 'assets/server/services/index.js');
   yeoman.copy('assets/server/services/_sampleService.js', 'assets/server/services/sampleService.js');
